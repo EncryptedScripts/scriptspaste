@@ -19,6 +19,8 @@ const main = require("./controllers/home/mainPage");
 const adminPost = require("./controllers/admin/postingControl");
 const adminCategory = require("./controllers/admin/categoryControl");
 const postingPage = require("./controllers/home/postingPage");
+const adminDownloadSteps = require("./controllers/admin/downloadStepsControl");
+const downloadStepsLoader = require("./controllers/home/downloadSteps");
 
 app.set("view engine", "ejs");
 app.set("views", viewsPath);
@@ -50,6 +52,8 @@ app.use(main);
 app.use(adminPost);
 app.use(adminCategory);
 app.use(postingPage);
+app.use(adminDownloadSteps);
+app.use(downloadStepsLoader);
 
 /*
 =====================================================

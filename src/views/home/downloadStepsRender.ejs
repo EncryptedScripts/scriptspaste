@@ -160,30 +160,30 @@
   <body>
     <div class="content">
       <div class="steps-container">
-        <h1><i class="fas fa-lock"></i> Complete the steps to proceed</h1>
+        <h1><i class="fas fa-lock"></i> Like & Subs Before Continue</h1>
         <div class="devider"></div>
         <ul id="steps-list">
-          <li class="steps-list" id="task-1">
-            <a
-              href="#"
-              onclick="completeTask(event, 'task-1', '<%= downloadSteps.subscribeYoutubeLink %>')"
-              ><i class="fab fa-youtube icon"></i>
-              <span>Subscribe to YouTube Channel</span></a
-            >
-          </li>
           <li class="steps-list" id="task-2">
             <a
               href="#"
               onclick="completeTask(event, 'task-2', '<%= downloadSteps.likeVideoLink %>')"
-              ><i class="fas fa-thumbs-up icon"></i>
-              <span>Like and Comment on the Video</span></a
+              ><i class="fas fa-thumbs-up icon"></i> <span>Like Video</span></a
+            >
+          </li>
+          <li class="steps-list" id="task-1">
+            <a
+              href="#"
+              onclick="completeTask(event, 'task-1', '<%= downloadSteps.subscribeYoutubeLink %>')"
+              ><i class="fab fa-youtube icon"></i> <span>Subscribe</span></a
             >
           </li>
         </ul>
         <div class="devider"></div>
         <form action="<%= downloadSteps.destinationLink %>" method="GET">
           <button type="submit" id="proceed-button" disabled>
-            <strong><i class="fas fa-check proceed-button"></i> Proceed</strong>
+            <strong
+              ><i class="fas fa-check proceed-button"></i> Continue</strong
+            >
           </button>
         </form>
       </div>

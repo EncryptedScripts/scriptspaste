@@ -249,6 +249,11 @@
               Delete Post
             </button>
           </form>
+          <form action="/posts/<%= post._id %>" method="GET" class="d-inline">
+            <button type="submit" class="btn btn-outline-primary btn-sm">
+              View Post
+            </button>
+          </form>
         </li>
         <% }) %> <% } else { %>
         <li class="list-group-item">No posts found.</li>

@@ -140,6 +140,7 @@ app.get("/admin/posts", isAuthenticated, async (req, res) => {
     const categories = await Category.find({});
     const query = search ? { title: { $regex: search, $options: "i" } } : {};
     const posts = await Post.find(query)
+      .sort({ createdAt: -1 })
       .skip((page - 1) * limit)
       .limit(limit)
       .populate("category")

@@ -150,18 +150,18 @@ app.get("/posts/:id", async (req, res) => {
       return res.status(404).send("Post not found");
     }
 
-    // Find the next post (older)
+    // Find the next post (newer)
     const nextPost = await Post.findOne({
-      createdAt: { $lt: post.createdAt },
-    })
-      .sort({ createdAt: -1 })
-      .limit(1);
-
-    // Find the previous post (newer)
-    const previousPost = await Post.findOne({
       createdAt: { $gt: post.createdAt },
     })
       .sort({ createdAt: 1 })
+      .limit(1);
+
+    // Find the previous post (older)
+    const previousPost = await Post.findOne({
+      createdAt: { $lt: post.createdAt },
+    })
+      .sort({ createdAt: -1 })
       .limit(1);
 
     // Find related posts by subCategory and limit to 3

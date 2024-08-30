@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const admin = require("../../database/auth");
 const Category = require("../../database/category");
+const Post = require("../../database/post");
 const bcrypt = require("bcrypt");
 const app = express();
 const publicDirectoryPath = path.join(__dirname, "../../public");
@@ -17,9 +18,32 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.get("/", async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = 8;
+  const search = req.query.search || "";
+
   try {
     const categories = await Category.find({});
-    res.render("home/index", { categories });
+
+    const query = search ? { title: { $regex: search, $options: "i" } } : {};
+
+    const posts = await Post.find(query)
+      .sort({ createdAt: -1 })
+      .skip((page - 1) * limit)
+      .limit(limit)
+      .populate("category")
+      .exec();
+
+    const count = await Post.countDocuments(query);
+
+    res.render("home/index", {
+      posts,
+      currentPage: page,
+      totalPages: Math.ceil(count / limit),
+      search,
+      categories,
+      limit,
+    });
   } catch (error) {
     console.log(error);
     res.status(500).send("Internal Server Error");

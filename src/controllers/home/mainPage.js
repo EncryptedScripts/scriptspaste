@@ -36,6 +36,26 @@ app.get("/about", async (req, res) => {
   }
 });
 
+app.get("/dmca", async (req, res) => {
+  try {
+    const categories = await Category.find({});
+    res.render("home/dmca", { categories });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+app.get("/contact", async (req, res) => {
+  try {
+    const categories = await Category.find({});
+    res.render("home/contact", { categories });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 app.get("/privacy-policy", async (req, res) => {
   try {
     const categories = await Category.find({});
